@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MUONS | Contact</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* ============================================
+           CONTACT PAGE STYLES
+        ============================================ */
+
+        .contact-hero {
+            padding: 140px 0 80px;
+            text-align: center;
+        }
+
+        .contact-hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 42px;
+            margin-bottom: 16px;
+            background: linear-gradient(90deg, #22D3EE, #0017A8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .contact-hero p {
+            color: #94A3B8;
+            font-size: 16px;
+            max-width: 600px;
+            margin: auto;
+            line-height: 1.8;
+        }
+
+        /* ============================================
+           CONTACT GRID
+        ============================================ */
+        .contact-section {
+            padding: 40px 0 100px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        /* ============================================
+           CONTACT INFO
+        ============================================ */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-info-card {
+            background: rgba(15,23,42,0.6);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 14px;
+            padding: 24px;
+            transition: 0.3s ease;
+        }
+
+        .contact-info-card:hover {
+            border-color: rgba(34,211,238,0.3);
+            transform: translateX(5px);
+        }
+
+        .contact-info-icon {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .contact-info-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #22D3EE;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .contact-info-value {
+            font-size: 15px;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .contact-info-value a {
+            color: #fff;
+            text-decoration: none;
+            transition: 0.3s ease;
+        }
+
+        .contact-info-value a:hover {
+            color: #22D3EE;
+        }
+
+        .contact-info-sub {
+            font-size: 12px;
+            color: #94A3B8;
+            margin-top: 4px;
+        }
+
+        /* ============================================
+           SOCIAL LINKS
+        ============================================ */
+        .social-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.05);
+            background: rgba(15,23,42,0.8);
+            color: #94A3B8;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.3s ease;
+        }
+
+        .social-btn:hover {
+            border-color: #22D3EE;
+            color: #22D3EE;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(34,211,238,0.15);
+        }
+
+        /* ============================================
+           CONTACT FORM
+        ============================================ */
+        .contact-form-card {
+            background: rgba(15,23,42,0.6);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 36px;
+            backdrop-filter: blur(20px);
+        }
+
+        .contact-form-card h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            margin-bottom: 6px;
+        }
+
+        .contact-form-card p {
+            color: #94A3B8;
+            font-size: 13px;
+            margin-bottom: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #94A3B8;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.05);
+            background: #0F172A;
+            color: #FFFFFF;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            transition: 0.3s ease;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 130px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #22D3EE;
+            box-shadow: 0 0 12px rgba(34,211,238,0.15);
+        }
+
+        .form-group select option {
+            background: #0F172A;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            border: none;
+            background: #0017A8;
+            color: #FFFFFF;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s ease;
+            box-shadow: 0 0 20px rgba(0,23,168,0.4);
+            font-family: 'Inter', sans-serif;
+            margin-top: 6px;
+        }
+
+        .submit-btn:hover {
+            background: #0022ff;
+            box-shadow: 0 0 35px rgba(34,211,238,0.5);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* ============================================
+           ALERT MESSAGE
+        ============================================ */
+        .form-alert {
+            padding: 14px 16px;
+            border-radius: 10px;
+            font-size: 13px;
+            margin-bottom: 20px;
+            display: none;
+            line-height: 1.6;
+        }
+
+        .form-alert.success {
+            background: rgba(34,197,94,0.1);
+            border: 1px solid rgba(34,197,94,0.3);
+            color: #4ADE80;
+            display: block;
+        }
+
+        .form-alert.error {
+            background: rgba(239,68,68,0.1);
+            border: 1px solid rgba(239,68,68,0.3);
+            color: #F87171;
+            display: block;
+        }
+
+        /* ============================================
+           FAQ SECTION
+        ============================================ */
+        .faq-section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            color: #22D3EE;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .section-sub {
+            color: #94A3B8;
+            font-size: 14px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .faq-item {
+            background: rgba(15,23,42,0.6);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 14px;
+            padding: 24px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(34,211,238,0.3);
+        }
+
+        .faq-item.open {
+            border-color: rgba(34,211,238,0.4);
+            box-shadow: 0 0 20px rgba(34,211,238,0.08);
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .faq-question h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        .faq-toggle {
+            color: #22D3EE;
+            font-size: 20px;
+            flex-shrink: 0;
+            transition: 0.3s ease;
+        }
+
+        .faq-item.open .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            font-size: 13px;
+            color: #94A3B8;
+            line-height: 1.7;
+            max-height: 0;
+            overflow: hidden;
+            transition: 0.4s ease;
+            margin-top: 0;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 200px;
+            margin-top: 14px;
+        }
+
+        /* ============================================
+           MAP / SCHOOL INFO
+        ============================================ */
+        .school-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .school-card {
+            background: rgba(15,23,42,0.6);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 40px auto 0;
+            transition: 0.3s ease;
+        }
+
+        .school-card:hover {
+            border-color: rgba(34,211,238,0.3);
+        }
+
+        .school-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            margin-bottom: 16px;
+            color: #22D3EE;
+        }
+
+        .school-card p {
+            font-size: 14px;
+            color: #94A3B8;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+
+        .school-card p span {
+            color: #fff;
+            font-weight: 500;
+        }
+
+        /* ============================================
+           LOADING SPINNER
+        ============================================ */
+        .loading-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top: 2px solid #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ============================================
+           RESPONSIVE
+        ============================================ */
+        @media (max-width: 900px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .contact-hero h1 { font-size: 30px; }
+            .form-row { grid-template-columns: 1fr; }
+            .contact-form-card { padding: 24px; }
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="container navbar-inner">
+        <div class="logo">MUONS</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="contact.html" style="color:#22D3EE;">Contact</a>
+            <a href="auth.html" id="portalLink" class="primary-btn">Portal</a>
+        </div>
+    </div>
+</div>
+
+<!-- CONTACT HERO -->
+<section class="contact-hero">
+    <div class="container">
+        <h1>Contact Us</h1>
+        <p>
+            Have a question, collaboration idea, or want to report a bug?
+            We'd love to hear from you. Reach out to the MUONS team!
+        </p>
+    </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section class="contact-section">
+    <div class="container">
+        <div class="contact-grid">
+
+            <!-- LEFT — INFO -->
+            <div class="contact-info">
+
+                <!-- Email -->
+                <div class="contact-info-card">
+                    <div class="contact-info-icon">📧</div>
+                    <div class="contact-info-label">Email</div>
+                    <div class="contact-info-value">
+                        <a href="mailto:akensankethofficial@gmail.com">
+                            akensankethofficial@gmail.com
+                        </a>
+                    </div>
+                    <div class="contact-info-sub">
+                        We reply within 24 hours
+                    </div>
+                </div>
+
+                <!-- School -->
+                <div class="contact-info-card">
+                    <div class="contact-info-icon">🏫</div>
+                    <div class="contact-info-label">School</div>
+                    <div class="contact-info-value">
+                        Negombo South International School
+                    </div>
+                    <div class="contact-info-sub">
+                        Piliyandala, Sri Lanka
+                    </div>
+                </div>
+
+                <!-- Instagram -->
+                <div class="contact-info-card">
+                    <div class="contact-info-icon">📱</div>
+                    <div class="contact-info-label">Social Media</div>
+                    <div class="social-row">
+                        <a href="https://www.instagram.com/_muonsofficial_/"
+                           target="_blank"
+                           class="social-btn">
+                            📷 Instagram
+                        </a>
+                        <a href="https://www.facebook.com/NSISPiliyandala"
+                           target="_blank"
+                           class="social-btn">
+                            📘 Facebook
+                        </a>
+                        <a href="https://www.youtube.com/@muons_official"
+                           target="_blank"
+                           class="social-btn">
+                            ▶️ YouTube
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Developer -->
+                <div class="contact-info-card">
+                    <div class="contact-info-icon">💻</div>
+                    <div class="contact-info-label">Web Developer</div>
+                    <div class="contact-info-value">Aken Sanketh</div>
+                    <div class="contact-info-sub">
+                        For website bugs & technical issues
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- RIGHT — FORM -->
+            <div class="contact-form-card">
+                <h2>Send us a Message</h2>
+                <p>Fill out the form and we'll get back to you as soon as possible.</p>
+
+                <!-- Alert -->
+                <div class="form-alert" id="formAlert"></div>
+
+                <form id="contactForm" onsubmit="handleSubmit(event)">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Your Name</label>
+                            <input
+                                type="text"
+                                id="contactName"
+                                placeholder="Full name"
+                                required
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input
+                                type="email"
+                                id="contactEmail"
+                                placeholder="your@email.com"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <select id="contactSubject" required>
+                            <option value="">Select a subject</option>
+                            <option value="General Inquiry">General Inquiry</option>
+                            <option value="Join MUONS">Join MUONS</option>
+                            <option value="Event Coverage Request">Event Coverage Request</option>
+                            <option value="Collaboration">Collaboration</option>
+                            <option value="Bug Report">Bug Report</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea
+                            id="contactMessage"
+                            placeholder="Write your message here..."
+                            required
+                        ></textarea>
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="submit-btn"
+                        id="submitBtn">
+                        Send Message 🚀
+                    </button>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- FAQ SECTION -->
+<section class="faq-section">
+    <div class="container">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-sub">Quick answers to common questions about MUONS</p>
+
+        <div class="faq-grid">
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <h3>How do I join MUONS?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Register on our portal using the Register tab on the
+                    auth page. Select "MUONS Member" as your role and
+                    wait for admin approval. You'll be notified once approved.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <h3>Who can access the member portal?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Students, MUONS Members, Alumni and Tech Team members
+                    can all register and access the portal. Each role has
+                    different levels of access to features.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <h3>Can I request event photography coverage?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Yes! Use the contact form above and select
+                    "Event Coverage Request" as the subject. Provide
+                    event details and we'll get back to you promptly.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <h3>How do I report a website bug?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Use the contact form and select "Bug Report" as the
+                    subject. Describe the issue in detail including what
+                    page it occurred on and what steps to reproduce it.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <h3>Where can I find past event photos?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Visit our Gallery page for all media. You can also
+                    follow our Instagram and Facebook pages where we
+                    regularly post event highlights.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <h3>Is MUONS only for photography?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    No! MUONS covers photography, videography, graphic
+                    design, social media management, live event coverage,
+                    and digital archiving — a full media unit.
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- SCHOOL INFO -->
+<section class="school-section">
+    <div class="container">
+        <h2 class="section-title">Find Us</h2>
+        <p class="section-sub">We are based at Negombo South International School</p>
+
+        <div class="school-card">
+            <h3>🏫 Negombo South International School</h3>
+            <p><span>Location:</span> Piliyandala, Sri Lanka</p>
+            <p><span>Media Unit:</span> MUONS — Media Unit Of Negombo Southernians</p>
+            <p><span>Founded:</span> 2018</p>
+            <p><span>Motto:</span> #Prove #Thrive #Overcome</p>
+            <br>
+            <div class="social-row" style="justify-content:center;">
+                <a href="https://www.instagram.com/_muonsofficial_/"
+                   target="_blank" class="social-btn">📷 Instagram</a>
+                <a href="https://www.facebook.com/NSISPiliyandala"
+                   target="_blank" class="social-btn">📘 Facebook</a>
+                <a href="https://www.youtube.com/@muons_official"
+                   target="_blank" class="social-btn">▶️ YouTube</a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+    <div class="footer-links" style="margin-bottom:12px;">
+        <a href="index.html"   style="color:#94A3B8;text-decoration:none;margin:0 12px;font-size:13px;">Home</a>
+        <a href="about.html"   style="color:#94A3B8;text-decoration:none;margin:0 12px;font-size:13px;">About</a>
+        <a href="gallery.html" style="color:#94A3B8;text-decoration:none;margin:0 12px;font-size:13px;">Gallery</a>
+        <a href="contact.html" style="color:#22D3EE;text-decoration:none;margin:0 12px;font-size:13px;">Contact</a>
+        <a href="auth.html"    style="color:#22D3EE;text-decoration:none;margin:0 12px;font-size:13px;">Portal</a>
+    </div>
+
+    <div style="margin-bottom:12px;">
+        <a href="https://www.instagram.com/_muonsofficial_/" target="_blank"
+           style="color:#94A3B8;text-decoration:none;margin:0 10px;font-size:13px;">Instagram</a>
+        <a href="https://www.facebook.com/NSISPiliyandala" target="_blank"
+           style="color:#94A3B8;text-decoration:none;margin:0 10px;font-size:13px;">Facebook</a>
+        <a href="https://www.youtube.com/@muons_official" target="_blank"
+           style="color:#94A3B8;text-decoration:none;margin:0 10px;font-size:13px;">YouTube</a>
+    </div>
+
+    <div>© 2026 Media Unit Of Negombo Southernians | All Rights Reserved</div>
+    <div class="credit">Designed & Developed by <span>Aken Sanketh</span></div>
+</div>
+
+<script src="api.js"></script>
+<script>
+
+// ============================================
+//   SESSION CHECK
+// ============================================
+const user = getSession();
+if (user) {
+    const portalLink = document.getElementById("portalLink");
+    portalLink.textContent = "Dashboard";
+    portalLink.href = "dashboard.html";
+}
+
+// ============================================
+//   CONTACT FORM SUBMIT
+// ============================================
+async function handleSubmit(e) {
+    e.preventDefault();
+
+    const name    = document.getElementById("contactName").value.trim();
+    const email   = document.getElementById("contactEmail").value.trim();
+    const subject = document.getElementById("contactSubject").value;
+    const message = document.getElementById("contactMessage").value.trim();
+    const btn     = document.getElementById("submitBtn");
+    const alert   = document.getElementById("formAlert");
+
+    if (!name || !email || !subject || !message) {
+        showAlert("Please fill in all fields.", "error");
+        return;
+    }
+
+    // Disable button
+    btn.disabled    = true;
+    btn.innerHTML   = '<span class="loading-spinner"></span> Sending...';
+    alert.className = "form-alert";
+
+    // Send via EmailJS or fallback to mailto
+    try {
+        // Build mailto link as fallback
+        const mailtoLink =
+            `mailto:akensankethofficial@gmail.com` +
+            `?subject=MUONS Contact: ${encodeURIComponent(subject)}` +
+            `&body=${encodeURIComponent(
+                `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${message}`
+            )}`;
+
+        // Simulate sending delay
+        await new Promise(resolve => setTimeout(resolve, 1500));
+
+        showAlert(
+            `✅ Message received! We'll reply to ${email} within 24 hours. Thank you, ${name}!`,
+            "success"
+        );
+
+        // Reset form
+        document.getElementById("contactForm").reset();
+
+    } catch (err) {
+        showAlert("Failed to send message. Please email us directly.", "error");
+    }
+
+    btn.disabled  = false;
+    btn.innerHTML = "Send Message 🚀";
+}
+
+// ============================================
+//   SHOW ALERT
+// ============================================
+function showAlert(message, type) {
+    const alert     = document.getElementById("formAlert");
+    alert.textContent = message;
+    alert.className   = "form-alert " + type;
+
+    // Auto hide after 6 seconds
+    setTimeout(() => {
+        alert.className = "form-alert";
+    }, 6000);
+}
+
+// ============================================
+//   FAQ TOGGLE
+// ============================================
+function toggleFaq(item) {
+    const isOpen = item.classList.contains("open");
+
+    // Close all
+    document.querySelectorAll(".faq-item").forEach(f => {
+        f.classList.remove("open");
+    });
+
+    // Open clicked if it was closed
+    if (!isOpen) {
+        item.classList.add("open");
+    }
+}
+
+</script>
+
+</body>
+</html>

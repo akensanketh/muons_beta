@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MUONS | About</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* ============================================
+           ABOUT PAGE STYLES
+        ============================================ */
+
+        .about-hero {
+            padding: 140px 0 80px;
+            text-align: center;
+        }
+
+        .about-hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 42px;
+            margin-bottom: 16px;
+            background: linear-gradient(90deg, #22D3EE, #0017A8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about-hero p {
+            color: #94A3B8;
+            font-size: 16px;
+            max-width: 600px;
+            margin: auto;
+            line-height: 1.8;
+        }
+
+        /* ============================================
+           SECTION TITLE
+        ============================================ */
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            color: #22D3EE;
+            margin-bottom: 10px;
+        }
+
+        .section-sub {
+            color: #94A3B8;
+            font-size: 14px;
+            margin-bottom: 40px;
+        }
+
+        /* ============================================
+           STORY SECTION
+        ============================================ */
+        .story-section {
+            padding: 80px 0;
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .story-text h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .story-text h2 span {
+            color: #22D3EE;
+        }
+
+        .story-text p {
+            color: #94A3B8;
+            font-size: 15px;
+            line-height: 1.9;
+            margin-bottom: 16px;
+        }
+
+        .story-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 30px;
+        }
+
+        .story-stat {
+            background: rgba(15,23,42,0.6);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: 0.3s ease;
+        }
+
+        .story-stat:hover {
+            border-color: rgba(34,211,238,0.3);
+            transform: translateY(-3px);
+        }
+
+        .story-stat h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 26px;
+            color: #22D3EE;
+            margin-bottom: 4px;
+        }
+
+        .story-stat p {
+            font-size: 12px;
+            color: #94A3B8;
+            margin: 0;
+        }
+
+        .story-image {
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        .story-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+            filter: brightness(0.85);
+            transition: 0.4s ease;
+        }
+
+        .story-image:hover img {
+            filter: brightness(1);
+            transform: scale(1.03);
+        }
+
+        /* ============================================
+           MOTTO SECTION
+        ============================================ */
+        .motto-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .motto-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .motto-card {
+            background: rgba(15,23,42,0.6);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 40px 30px;
+            transition: 0.4s ease;
+        }
+
+        .motto-card:hover {
+            border-color: #22D3EE;
+            box-shadow: 0 0 30px rgba(34,211,238,0.15);
+            transform: translateY(-8px);
+        }
+
+        .motto-icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+
+        .motto-word {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            color: #22D3EE;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
+
+        .motto-desc {
+            font-size: 14px;
+            color: #94A3B8;
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           TEAM SECTION
+        ============================================ */
+        .team-section {
+            padding: 80px 0;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .team-member-card {
+            background: rgba(15,23,42,0.6);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 28px;
+            text-align: center;
+            transition: 0.4s ease;
+        }
+
+        .team-member-card:hover {
+            border-color: rgba(34,211,238,0.3);
+            box-shadow: 0 0 25px rgba(34,211,238,0.1);
+            transform: translateY(-5px);
+        }
+
+        .member-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0017A8, #22D3EE);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0 auto 16px;
+        }
+
+        .member-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .member-role {
+            font-size: 12px;
+            color: #22D3EE;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 12px;
+            border-radius: 999px;
+            background: rgba(34,211,238,0.08);
+            border: 1px solid rgba(34,211,238,0.2);
+            display: inline-block;
+        }
+
+        /* ============================================
+           SOCIAL SECTION
+        ============================================ */
+        .social-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .social-card {
+            background: rgba(15,23,42,0.6);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 28px 40px;
+            text-decoration: none;
+            color: #fff;
+            transition: 0.4s ease;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-width: 200px;
+        }
+
+        .social-card:hover {
+            border-color: #22D3EE;
+            box-shadow: 0 0 25px rgba(34,211,238,0.2);
+            transform: translateY(-5px);
+            color: #22D3EE;
+        }
+
+        .social-card-icon {
+            font-size: 28px;
+        }
+
+        .social-card-info {
+            text-align: left;
+        }
+
+        .social-card-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .social-card-handle {
+            font-size: 12px;
+            color: #94A3B8;
+        }
+
+        /* ============================================
+           TIMELINE
+        ============================================ */
+        .timeline-section {
+            padding: 80px 0;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 700px;
+            margin: 40px auto 0;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: rgba(34,211,238,0.2);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: calc(50% + 30px);
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-right: 0;
+            padding-left: calc(50% + 30px);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 16px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #22D3EE;
+            transform: translateX(-50%);
+            box-shadow: 0 0 12px rgba(34,211,238,0.5);
+        }
+
+        .timeline-content {
+            background: rgba(15,23,42,0.6);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 18px 22px;
+            max-width: 280px;
+            transition: 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            border-color: rgba(34,211,238,0.3);
+        }
+
+        .timeline-year {
+            font-size: 11px;
+            color: #22D3EE;
+            font-weight: 600;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+        }
+
+        .timeline-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .timeline-desc {
+            font-size: 12px;
+            color: #94A3B8;
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           RESPONSIVE
+        ============================================ */
+        @media (max-width: 768px) {
+            .story-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .motto-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-hero h1 {
+                font-size: 30px;
+            }
+
+            .timeline::before { left: 20px; }
+
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                justify-content: flex-start;
+                padding-left: 50px;
+                padding-right: 0;
+            }
+
+            .timeline-dot { left: 20px; }
+
+            .timeline-content { max-width: 100%; }
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="container navbar-inner">
+        <div class="logo">MUONS</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html" style="color:#22D3EE;">About</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="contact.html">Contact</a>
+            <a href="auth.html" id="portalLink" class="primary-btn">Portal</a>
+        </div>
+    </div>
+</div>
+
+<!-- ABOUT HERO -->
+<section class="about-hero">
+    <div class="container">
+        <h1>About MUONS</h1>
+        <p>
+            The official digital media authority of Negombo South International School.
+            Capturing excellence. Creating legacy. Powering modern school media since 2018.
+        </p>
+    </div>
+</section>
+
+<!-- STORY SECTION -->
+<section class="story-section">
+    <div class="container">
+        <div class="story-grid">
+
+            <div class="story-text">
+                <h2>Our <span>Story</span></h2>
+                <p>
+                    MUONS — Media Unit Of Negombo Southernians — was founded in 2018
+                    as the official media body of Negombo South International School.
+                    What started as a small photography club has grown into a
+                    full-scale digital media unit.
+                </p>
+                <p>
+                    We handle photography, videography, graphic design, social media,
+                    live coverage, and digital archiving for every major school event —
+                    from sports meets to cultural festivals.
+                </p>
+                <p>
+                    Our motto <strong style="color:#22D3EE;">#Prove #Thrive #Overcome</strong>
+                    drives everything we do. We don't just capture moments —
+                    we preserve the legacy of Negombo South International School.
+                </p>
+
+                <div class="story-stats">
+                    <div class="story-stat">
+                        <h3>2018</h3>
+                        <p>Year Founded</p>
+                    </div>
+                    <div class="story-stat">
+                        <h3>50+</h3>
+                        <p>Events Covered</p>
+                    </div>
+                    <div class="story-stat">
+                        <h3>120K+</h3>
+                        <p>Photos Captured</p>
+                    </div>
+                    <div class="story-stat">
+                        <h3>35</h3>
+                        <p>Active Members</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-image">
+                <img
+                    src="https://muons.rf.gd/wp-content/uploads/2025/09/Media-Crew.png"
+                    alt="MUONS Media Crew"
+                >
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- MOTTO SECTION -->
+<section class="motto-section">
+    <div class="container">
+        <h2 class="section-title">Our Motto</h2>
+        <p class="section-sub">Three words that define everything we stand for</p>
+
+        <div class="motto-grid">
+
+            <div class="motto-card">
+                <div class="motto-icon">💪</div>
+                <div class="motto-word">#PROVE</div>
+                <p class="motto-desc">
+                    We prove our capabilities through every frame we capture,
+                    every video we produce, and every event we cover.
+                    Excellence is not claimed — it is demonstrated.
+                </p>
+            </div>
+
+            <div class="motto-card">
+                <div class="motto-icon">🚀</div>
+                <div class="motto-word">#THRIVE</div>
+                <p class="motto-desc">
+                    We don't just survive — we thrive. MUONS grows stronger
+                    with every challenge, evolving our skills, tools,
+                    and creative vision each season.
+                </p>
+            </div>
+
+            <div class="motto-card">
+                <div class="motto-icon">⚡</div>
+                <div class="motto-word">#OVERCOME</div>
+                <p class="motto-desc">
+                    Every obstacle is an opportunity. We overcome technical
+                    challenges, creative blocks, and tough deadlines with
+                    teamwork and determination.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- EXECUTIVE BOARD -->
+<section class="team-section">
+    <div class="container">
+        <h2 class="section-title">Executive Board 2025/2026</h2>
+        <p class="section-sub">
+            The core student leadership guiding MUONS this season
+        </p>
+
+        <div class="team-grid">
+
+            <div class="team-member-card">
+                <div class="member-avatar">N</div>
+                <div class="member-name">Nethu Thathsara Dissanayake</div>
+                <br>
+                <span class="member-role">President</span>
+            </div>
+
+            <div class="team-member-card">
+                <div class="member-avatar">S</div>
+                <div class="member-name">Sanithu Ransen Aththanayake</div>
+                <br>
+                <span class="member-role">Vice President</span>
+            </div>
+
+            <div class="team-member-card">
+                <div class="member-avatar">D</div>
+                <div class="member-name">Durangi Dheeshana Thathsarani</div>
+                <br>
+                <span class="member-role">Secretary</span>
+            </div>
+
+            <div class="team-member-card">
+                <div class="member-avatar">J</div>
+                <div class="member-name">Janudi Mehansa Senerath Yapa</div>
+                <br>
+                <span class="member-role">Vice Secretary</span>
+            </div>
+
+            <div class="team-member-card">
+                <div class="member-avatar">S</div>
+                <div class="member-name">Senuli Piyansa Gamage</div>
+                <br>
+                <span class="member-role">Chief Organizer</span>
+            </div>
+
+            <div class="team-member-card">
+                <div class="member-avatar">M</div>
+                <div class="member-name">Maleesha Sadew</div>
+                <br>
+                <span class="member-role">Technical Coordinator</span>
+            </div>
+
+            <div class="team-member-card">
+                <div class="member-avatar">M</div>
+                <div class="member-name">Methuka Damsas</div>
+                <br>
+                <span class="member-role">Event Coordinator</span>
+            </div>
+
+            <div class="team-member-card">
+                <div class="member-avatar">Y</div>
+                <div class="member-name">Yemeema Juno</div>
+                <br>
+                <span class="member-role">Event Coordinator</span>
+            </div>
+
+            <div class="team-member-card">
+                <div class="member-avatar">V</div>
+                <div class="member-name">Vinara Sasmi Wijewardana</div>
+                <br>
+                <span class="member-role">Organizer</span>
+            </div>
+
+            <div class="team-member-card">
+                <div class="member-avatar">C</div>
+                <div class="member-name">Claudia de Silva</div>
+                <br>
+                <span class="member-role">Organizer</span>
+            </div>
+
+            <div class="team-member-card">
+                <div class="member-avatar">D</div>
+                <div class="member-name">Danuni Damdini</div>
+                <br>
+                <span class="member-role">Organizer</span>
+            </div>
+
+            <div class="team-member-card">
+                <div class="member-avatar">A</div>
+                <div class="member-name">Aken Sanketh</div>
+                <br>
+                <span class="member-role">Web Developer</span>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section">
+    <div class="container">
+        <h2 class="section-title" style="text-align:center;">Our Journey</h2>
+        <p class="section-sub" style="text-align:center;">
+            Key milestones in MUONS history
+        </p>
+
+        <div class="timeline">
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">2018</div>
+                    <div class="timeline-title">MUONS Founded</div>
+                    <div class="timeline-desc">
+                        Media Unit Of Negombo Southernians established
+                        as the official school media body.
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">2019</div>
+                    <div class="timeline-title">First Major Event</div>
+                    <div class="timeline-desc">
+                        Covered first large-scale school event with
+                        full photography and videography team.
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">2022</div>
+                    <div class="timeline-title">Social Media Launch</div>
+                    <div class="timeline-desc">
+                        Official Instagram, Facebook and YouTube
+                        channels launched to share our work.
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">2025</div>
+                    <div class="timeline-title">Website Launch</div>
+                    <div class="timeline-desc">
+                        First official MUONS website launched,
+                        designed and developed by Aken Sanketh.
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">2026</div>
+                    <div class="timeline-title">Portal Launch</div>
+                    <div class="timeline-desc">
+                        Full member portal with dashboard, gallery,
+                        events and equipment tracking launched.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- SOCIAL SECTION -->
+<section class="social-section">
+    <div class="container">
+        <h2 class="section-title">Find Us Online</h2>
+        <p class="section-sub">Follow MUONS on social media</p>
+
+        <div class="social-links">
+
+            <a href="https://www.instagram.com/_muonsofficial_/"
+               target="_blank"
+               class="social-card">
+                <div class="social-card-icon">📷</div>
+                <div class="social-card-info">
+                    <div class="social-card-name">Instagram</div>
+                    <div class="social-card-handle">@_muonsofficial_</div>
+                </div>
+            </a>
+
+            <a href="https://www.facebook.com/NSISPiliyandala"
+               target="_blank"
+               class="social-card">
+                <div class="social-card-icon">📘</div>
+                <div class="social-card-info">
+                    <div class="social-card-name">Facebook</div>
+                    <div class="social-card-handle">NSISPiliyandala</div>
+                </div>
+            </a>
+
+            <a href="https://www.youtube.com/@muons_official"
+               target="_blank"
+               class="social-card">
+                <div class="social-card-icon">▶️</div>
+                <div class="social-card-info">
+                    <div class="social-card-name">YouTube</div>
+                    <div class="social-card-handle">@muons_official</div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+    <div class="footer-links" style="margin-bottom:12px;">
+        <a href="index.html"  style="color:#94A3B8;text-decoration:none;margin:0 12px;font-size:13px;">Home</a>
+        <a href="about.html"  style="color:#22D3EE;text-decoration:none;margin:0 12px;font-size:13px;">About</a>
+        <a href="gallery.html" style="color:#94A3B8;text-decoration:none;margin:0 12px;font-size:13px;">Gallery</a>
+        <a href="contact.html" style="color:#94A3B8;text-decoration:none;margin:0 12px;font-size:13px;">Contact</a>
+        <a href="auth.html"   style="color:#22D3EE;text-decoration:none;margin:0 12px;font-size:13px;">Portal</a>
+    </div>
+
+    <div style="margin-bottom:12px;">
+        <a href="https://www.instagram.com/_muonsofficial_/" target="_blank"
+           style="color:#94A3B8;text-decoration:none;margin:0 10px;font-size:13px;">Instagram</a>
+        <a href="https://www.facebook.com/NSISPiliyandala" target="_blank"
+           style="color:#94A3B8;text-decoration:none;margin:0 10px;font-size:13px;">Facebook</a>
+        <a href="https://www.youtube.com/@muons_official" target="_blank"
+           style="color:#94A3B8;text-decoration:none;margin:0 10px;font-size:13px;">YouTube</a>
+    </div>
+
+    <div>© 2026 Media Unit Of Negombo Southernians | All Rights Reserved</div>
+    <div class="credit">Designed & Developed by <span>Aken Sanketh</span></div>
+</div>
+
+<script src="api.js"></script>
+<script>
+
+// Update portal link if logged in
+const user = getSession();
+if (user) {
+    const portalLink = document.getElementById("portalLink");
+    portalLink.textContent = "Dashboard";
+    portalLink.href = "dashboard.html";
+}
+
+</script>
+
+</body>
+</html>

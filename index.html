@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MUONS | Futuristic Media Unit</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="container navbar-inner">
+        <div class="logo">MUONS</div>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="contact.html">Contact</a>
+            <a href="auth.html" id="portalLink" class="primary-btn">Portal</a>
+        </div>
+    </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="container">
+        <h1>Media Unit Of Negombo Southernians</h1>
+        <p>
+            The official digital media authority of Negombo South International School.
+            Capturing excellence. Creating legacy. Powering modern school media.
+        </p>
+
+        <a href="auth.html" id="heroButton" class="primary-btn">Enter Portal</a>
+        <a href="about.html" class="secondary-btn">Learn More</a>
+    </div>
+</section>
+
+<!-- STATS -->
+<section>
+    <div class="container stats">
+        <div class="stat-box">
+            <h2>50+</h2>
+            <p>Events Covered</p>
+        </div>
+
+        <div class="stat-box">
+            <h2>120K+</h2>
+            <p>Photos Captured</p>
+        </div>
+
+        <div class="stat-box">
+            <h2>35</h2>
+            <p>Active Members</p>
+        </div>
+    </div>
+</section>
+
+<!-- ROLES -->
+<section>
+    <div class="container card-grid">
+
+        <div class="card">
+            <h3>Students</h3>
+            <p>
+                Access official event galleries, school news,
+                and featured media highlights.
+            </p>
+            <br>
+            <a href="gallery.html" class="secondary-btn" style="font-size:13px; padding: 8px 18px;">
+                View Gallery →
+            </a>
+        </div>
+
+        <div class="card">
+            <h3>Active Members</h3>
+            <p>
+                Digital Media Pass, equipment tracking,
+                production assignments and media management.
+            </p>
+            <br>
+            <a href="auth.html" class="secondary-btn" style="font-size:13px; padding: 8px 18px;">
+                Enter Portal →
+            </a>
+        </div>
+
+        <div class="card">
+            <h3>Alumni</h3>
+            <p>
+                Explore archives, past achievements,
+                and preserved MUONS legacy collections.
+            </p>
+            <br>
+            <a href="about.html" class="secondary-btn" style="font-size:13px; padding: 8px 18px;">
+                Learn More →
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<!-- LATEST NEWS PREVIEW -->
+<section>
+    <div class="container" style="padding: 60px 0;">
+
+        <h2 style="
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #22D3EE;
+        ">Latest News</h2>
+
+        <p style="color: #94A3B8; margin-bottom: 30px; font-size: 14px;">
+            Stay updated with the latest from MUONS
+        </p>
+
+        <!-- News will load here -->
+        <div id="newsPreview" style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        ">
+            <div style="color: #94A3B8; font-size: 14px;">Loading news...</div>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="dashboard.html" class="secondary-btn">View All News →</a>
+        </div>
+
+    </div>
+</section>
+
+<!-- UPCOMING EVENTS PREVIEW -->
+<section>
+    <div class="container" style="padding: 60px 0;">
+
+        <h2 style="
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #22D3EE;
+        ">Upcoming Events</h2>
+
+        <p style="color: #94A3B8; margin-bottom: 30px; font-size: 14px;">
+            Don't miss what's coming next
+        </p>
+
+        <!-- Events will load here -->
+        <div id="eventsPreview" style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        ">
+            <div style="color: #94A3B8; font-size: 14px;">Loading events...</div>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="dashboard.html" class="secondary-btn">View All Events →</a>
+        </div>
+
+    </div>
+</section>
+
+<!-- GALLERY PREVIEW -->
+<section>
+    <div class="container" style="padding: 60px 0;">
+
+        <h2 style="
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #22D3EE;
+        ">Our Gallery</h2>
+
+        <p style="color: #94A3B8; margin-bottom: 30px; font-size: 14px;">
+            Capturing excellence, frame by frame
+        </p>
+
+        <!-- Gallery preview -->
+        <div style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        ">
+            <div style="border-radius:12px; overflow:hidden; border: 1px solid rgba(255,255,255,0.05);">
+                <img src="https://muons.rf.gd/wp-content/uploads/2025/09/SM.jpg"
+                     alt="Sports Meet 2026"
+                     style="width:100%; height:200px; object-fit:cover;">
+                <div style="padding:12px; background:rgba(15,23,42,0.8);">
+                    <p style="font-size:13px; color:#22D3EE;">Sports Meet 2026</p>
+                </div>
+            </div>
+
+            <div style="border-radius:12px; overflow:hidden; border: 1px solid rgba(255,255,255,0.05);">
+                <img src="https://muons.rf.gd/wp-content/uploads/2025/09/Roctober.jpg"
+                     alt="Rocktober 2025"
+                     style="width:100%; height:200px; object-fit:cover;">
+                <div style="padding:12px; background:rgba(15,23,42,0.8);">
+                    <p style="font-size:13px; color:#22D3EE;">Rocktober 2025</p>
+                </div>
+            </div>
+
+            <div style="border-radius:12px; overflow:hidden; border: 1px solid rgba(255,255,255,0.05);">
+                <img src="https://muons.rf.gd/wp-content/uploads/2025/09/PG.jpg"
+                     alt="Prize Giving 2025"
+                     style="width:100%; height:200px; object-fit:cover;">
+                <div style="padding:12px; background:rgba(15,23,42,0.8);">
+                    <p style="font-size:13px; color:#22D3EE;">Prize Giving 2025</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="gallery.html" class="primary-btn">View Full Gallery →</a>
+        </div>
+
+    </div>
+</section>
+
+<!-- ABOUT PREVIEW -->
+<section>
+    <div class="container" style="padding: 60px 0; text-align: center;">
+
+        <h2 style="
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            margin-bottom: 16px;
+            color: #22D3EE;
+        ">About MUONS</h2>
+
+        <p style="
+            color: #94A3B8;
+            font-size: 15px;
+            max-width: 650px;
+            margin: auto;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        ">
+            Founded in 2018, MUONS is the official media unit of
+            Negombo South International School. We capture every
+            moment — from sports victories to creative events —
+            preserving the school's legacy through photography,
+            videography, and digital media.
+        </p>
+
+        <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+            <a href="about.html" class="primary-btn">Meet The Team →</a>
+            <a href="contact.html" class="secondary-btn">Contact Us →</a>
+        </div>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+    <div class="footer-links" style="margin-bottom: 12px;">
+        <a href="index.html" style="color:#94A3B8; text-decoration:none; margin: 0 12px; font-size:13px;">Home</a>
+        <a href="about.html" style="color:#94A3B8; text-decoration:none; margin: 0 12px; font-size:13px;">About</a>
+        <a href="gallery.html" style="color:#94A3B8; text-decoration:none; margin: 0 12px; font-size:13px;">Gallery</a>
+        <a href="contact.html" style="color:#94A3B8; text-decoration:none; margin: 0 12px; font-size:13px;">Contact</a>
+        <a href="auth.html" style="color:#22D3EE; text-decoration:none; margin: 0 12px; font-size:13px;">Portal</a>
+    </div>
+
+    <div style="margin-bottom: 12px;">
+        <a href="https://www.instagram.com/_muonsofficial_/" target="_blank"
+           style="color:#94A3B8; text-decoration:none; margin: 0 10px; font-size:13px;">Instagram</a>
+        <a href="https://www.facebook.com/NSISPiliyandala" target="_blank"
+           style="color:#94A3B8; text-decoration:none; margin: 0 10px; font-size:13px;">Facebook</a>
+        <a href="https://www.youtube.com/@muons_official" target="_blank"
+           style="color:#94A3B8; text-decoration:none; margin: 0 10px; font-size:13px;">YouTube</a>
+    </div>
+
+    <div>© 2026 Media Unit Of Negombo Southernians | All Rights Reserved</div>
+    <div class="credit">
+        Designed & Developed by <span>Aken Sanketh</span>
+    </div>
+</div>
+
+<!-- ================= SCRIPT ================= -->
+<script src="api.js"></script>
+<script>
+
+// ============================================
+//   UPDATE PORTAL BUTTON IF LOGGED IN
+// ============================================
+const portalLink = document.getElementById("portalLink");
+const heroButton = document.getElementById("heroButton");
+const user = getSession();
+
+if (user) {
+    portalLink.textContent = "Dashboard";
+    portalLink.href = "dashboard.html";
+
+    heroButton.textContent = "Go to Dashboard";
+    heroButton.href = "dashboard.html";
+}
+
+// ============================================
+//   LOAD NEWS PREVIEW
+// ============================================
+async function loadNewsPreview() {
+    const result = await getNews();
+    const container = document.getElementById("newsPreview");
+
+    if (result.success && result.data.length > 0) {
+        const latest = result.data.slice(0, 3);
+        container.innerHTML = latest.map(news => `
+            <div class="card">
+                <p style="font-size:11px; color:#22D3EE; margin-bottom:8px;">
+                    📅 ${news.date}
+                </p>
+                <h3 style="font-size:16px; margin-bottom:8px;">${news.title}</h3>
+                <p style="font-size:13px; color:#94A3B8;">
+                    ${news.content.substring(0, 100)}...
+                </p>
+                <p style="font-size:11px; color:#64748B; margin-top:10px;">
+                    By ${news.author}
+                </p>
+            </div>
+        `).join("");
+    } else {
+        container.innerHTML = `
+            <p style="color:#94A3B8; font-size:14px;">
+                No news yet. Check back soon!
+            </p>`;
+    }
+}
+
+// ============================================
+//   LOAD EVENTS PREVIEW
+// ============================================
+async function loadEventsPreview() {
+    const result = await getEvents();
+    const container = document.getElementById("eventsPreview");
+
+    if (result.success && result.data.length > 0) {
+        const upcoming = result.data
+            .filter(e => e.status === "upcoming")
+            .slice(0, 3);
+
+        if (upcoming.length > 0) {
+            container.innerHTML = upcoming.map(event => `
+                <div class="card">
+                    <p style="font-size:11px; color:#22D3EE; margin-bottom:8px;">
+                        📅 ${event.date} | 📍 ${event.venue}
+                    </p>
+                    <h3 style="font-size:16px; margin-bottom:8px;">${event.title}</h3>
+                    <p style="font-size:13px; color:#94A3B8;">${event.description}</p>
+                    <span style="
+                        display:inline-block;
+                        margin-top:10px;
+                        padding: 4px 12px;
+                        border-radius:999px;
+                        font-size:11px;
+                        background: rgba(34,211,238,0.1);
+                        border: 1px solid rgba(34,211,238,0.3);
+                        color: #22D3EE;
+                    ">Upcoming</span>
+                </div>
+            `).join("");
+        } else {
+            container.innerHTML = `
+                <p style="color:#94A3B8; font-size:14px;">
+                    No upcoming events right now.
+                </p>`;
+        }
+    } else {
+        container.innerHTML = `
+            <p style="color:#94A3B8; font-size:14px;">
+                No events yet. Check back soon!
+            </p>`;
+    }
+}
+
+// ============================================
+//   INIT
+// ============================================
+loadNewsPreview();
+loadEventsPreview();
+
+</script>
+
+</body>
+</html>

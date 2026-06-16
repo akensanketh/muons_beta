@@ -1,0 +1,1744 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MUONS | Dashboard</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* ============================================
+           DASHBOARD LAYOUT
+        ============================================ */
+        .dashboard-wrapper {
+            display: flex;
+            min-height: 100vh;
+            padding-top: 70px;
+        }
+
+        /* ============================================
+           SIDEBAR
+        ============================================ */
+        .sidebar {
+            width: 260px;
+            min-height: calc(100vh - 70px);
+            background: rgba(15,23,42,0.95);
+            border-right: 1px solid rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            padding: 30px 0;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            bottom: 0;
+            overflow-y: auto;
+            z-index: 100;
+            transition: 0.3s ease;
+        }
+
+        .sidebar-user {
+            padding: 0 20px 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            margin-bottom: 20px;
+        }
+
+        .sidebar-user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0017A8, #22D3EE);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .sidebar-user-name {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .sidebar-user-role {
+            font-size: 11px;
+            color: #22D3EE;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+            padding: 0 12px;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 4px;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 16px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #94A3B8;
+            font-size: 14px;
+            font-weight: 500;
+            transition: 0.3s ease;
+            cursor: pointer;
+        }
+
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+            background: rgba(34,211,238,0.08);
+            color: #22D3EE;
+        }
+
+        .sidebar-nav a .nav-icon {
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .sidebar-section-label {
+            padding: 16px 28px 8px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #475569;
+        }
+
+        .sidebar-logout {
+            padding: 12px;
+            margin-top: auto;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 20px;
+        }
+
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            padding: 11px 16px;
+            border-radius: 10px;
+            background: none;
+            border: 1px solid rgba(239,68,68,0.2);
+            color: #F87171;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .logout-btn:hover {
+            background: rgba(239,68,68,0.1);
+            border-color: rgba(239,68,68,0.4);
+        }
+
+        /* ============================================
+           MAIN CONTENT
+        ============================================ */
+        .main-content {
+            margin-left: 260px;
+            flex: 1;
+            padding: 30px;
+            min-height: calc(100vh - 70px);
+        }
+
+        /* ============================================
+           PANELS
+        ============================================ */
+        .panel {
+            display: none;
+        }
+
+        .panel.active {
+            display: block;
+        }
+
+        /* ============================================
+           PANEL HEADER
+        ============================================ */
+        .panel-header {
+            margin-bottom: 28px;
+        }
+
+        .panel-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        .panel-header p {
+            color: #94A3B8;
+            font-size: 14px;
+        }
+
+        /* ============================================
+           DASHBOARD CARDS
+        ============================================ */
+        .dash-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .dash-card {
+            background: rgba(15,23,42,0.6);
+            border: 1px solid rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 14px;
+            padding: 24px;
+            transition: 0.3s ease;
+        }
+
+        .dash-card:hover {
+            border-color: rgba(34,211,238,0.3);
+            transform: translateY(-3px);
+        }
+
+        .dash-card-icon {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .dash-card-value {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #22D3EE;
+            margin-bottom: 4px;
+        }
+
+        .dash-card-label {
+            font-size: 13px;
+            color: #94A3B8;
+        }
+
+        /* ============================================
+           TABLES
+        ============================================ */
+        .table-wrapper {
+            background: rgba(15,23,42,0.6);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 14px;
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .table-header {
+            padding: 18px 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table-header h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            padding: 12px 24px;
+            text-align: left;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #64748B;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        td {
+            padding: 14px 24px;
+            font-size: 14px;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            color: #CBD5E1;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: rgba(34,211,238,0.03);
+        }
+
+        /* ============================================
+           STATUS BADGES
+        ============================================ */
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-approved, .badge-available {
+            background: rgba(34,197,94,0.1);
+            border: 1px solid rgba(34,197,94,0.3);
+            color: #4ADE80;
+        }
+
+        .badge-pending {
+            background: rgba(251,191,36,0.1);
+            border: 1px solid rgba(251,191,36,0.3);
+            color: #FCD34D;
+        }
+
+        .badge-rejected, .badge-unavailable {
+            background: rgba(239,68,68,0.1);
+            border: 1px solid rgba(239,68,68,0.3);
+            color: #F87171;
+        }
+
+        .badge-upcoming {
+            background: rgba(34,211,238,0.1);
+            border: 1px solid rgba(34,211,238,0.3);
+            color: #22D3EE;
+        }
+
+        .badge-completed {
+            background: rgba(148,163,184,0.1);
+            border: 1px solid rgba(148,163,184,0.3);
+            color: #94A3B8;
+        }
+
+        .badge-admin {
+            background: rgba(168,85,247,0.1);
+            border: 1px solid rgba(168,85,247,0.3);
+            color: #C084FC;
+        }
+
+        .badge-member {
+            background: rgba(34,211,238,0.1);
+            border: 1px solid rgba(34,211,238,0.3);
+            color: #22D3EE;
+        }
+
+        .badge-tech {
+            background: rgba(251,146,60,0.1);
+            border: 1px solid rgba(251,146,60,0.3);
+            color: #FB923C;
+        }
+
+        .badge-alumni {
+            background: rgba(99,102,241,0.1);
+            border: 1px solid rgba(99,102,241,0.3);
+            color: #818CF8;
+        }
+
+        .badge-student {
+            background: rgba(148,163,184,0.1);
+            border: 1px solid rgba(148,163,184,0.3);
+            color: #94A3B8;
+        }
+
+        /* ============================================
+           FORMS IN DASHBOARD
+        ============================================ */
+        .dash-form {
+            background: rgba(15,23,42,0.6);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 14px;
+            padding: 28px;
+            margin-bottom: 24px;
+        }
+
+        .dash-form h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #22D3EE;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #94A3B8;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 11px 14px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.05);
+            background: #0F172A;
+            color: #FFFFFF;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            transition: 0.3s ease;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #22D3EE;
+            box-shadow: 0 0 10px rgba(34,211,238,0.2);
+        }
+
+        .form-group select option {
+            background: #0F172A;
+        }
+
+        /* ============================================
+           BUTTONS
+        ============================================ */
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary {
+            background: #0017A8;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(0,23,168,0.3);
+        }
+
+        .btn-primary:hover {
+            background: #0022ff;
+            box-shadow: 0 0 25px rgba(34,211,238,0.4);
+        }
+
+        .btn-success {
+            background: rgba(34,197,94,0.15);
+            color: #4ADE80;
+            border: 1px solid rgba(34,197,94,0.3);
+        }
+
+        .btn-success:hover {
+            background: rgba(34,197,94,0.25);
+        }
+
+        .btn-danger {
+            background: rgba(239,68,68,0.15);
+            color: #F87171;
+            border: 1px solid rgba(239,68,68,0.3);
+        }
+
+        .btn-danger:hover {
+            background: rgba(239,68,68,0.25);
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        /* ============================================
+           ALERT / MESSAGE
+        ============================================ */
+        .dash-alert {
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        .dash-alert.show { display: block; }
+
+        .dash-alert.success {
+            background: rgba(34,197,94,0.1);
+            border: 1px solid rgba(34,197,94,0.3);
+            color: #4ADE80;
+        }
+
+        .dash-alert.error {
+            background: rgba(239,68,68,0.1);
+            border: 1px solid rgba(239,68,68,0.3);
+            color: #F87171;
+        }
+
+        /* ============================================
+           NEWS CARDS
+        ============================================ */
+        .news-list {
+            display: grid;
+            gap: 16px;
+        }
+
+        .news-item {
+            background: rgba(15,23,42,0.6);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 20px 24px;
+            transition: 0.3s ease;
+        }
+
+        .news-item:hover {
+            border-color: rgba(34,211,238,0.2);
+        }
+
+        .news-item-date {
+            font-size: 11px;
+            color: #22D3EE;
+            margin-bottom: 8px;
+        }
+
+        .news-item-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .news-item-content {
+            font-size: 13px;
+            color: #94A3B8;
+            line-height: 1.7;
+        }
+
+        .news-item-author {
+            font-size: 11px;
+            color: #475569;
+            margin-top: 10px;
+        }
+
+        /* ============================================
+           EVENT CARDS
+        ============================================ */
+        .events-list {
+            display: grid;
+            gap: 16px;
+        }
+
+        .event-item {
+            background: rgba(15,23,42,0.6);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            transition: 0.3s ease;
+        }
+
+        .event-item:hover {
+            border-color: rgba(34,211,238,0.2);
+        }
+
+        .event-date {
+            background: rgba(34,211,238,0.1);
+            border: 1px solid rgba(34,211,238,0.2);
+            border-radius: 10px;
+            padding: 12px 16px;
+            text-align: center;
+            min-width: 70px;
+        }
+
+        .event-date-day {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #22D3EE;
+        }
+
+        .event-date-month {
+            font-size: 11px;
+            color: #94A3B8;
+            text-transform: uppercase;
+        }
+
+        .event-info { flex: 1; }
+
+        .event-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+
+        .event-venue {
+            font-size: 12px;
+            color: #94A3B8;
+            margin-bottom: 8px;
+        }
+
+        .event-desc {
+            font-size: 13px;
+            color: #64748B;
+        }
+
+        /* ============================================
+           MEMBER PROFILE CARD
+        ============================================ */
+        .profile-card {
+            background: rgba(15,23,42,0.6);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 14px;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0017A8, #22D3EE);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            flex-shrink: 0;
+        }
+
+        .profile-info h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            margin-bottom: 6px;
+        }
+
+        .profile-info p {
+            color: #94A3B8;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        /* ============================================
+           MOBILE SIDEBAR TOGGLE
+        ============================================ */
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #0017A8;
+            border: none;
+            color: #fff;
+            font-size: 22px;
+            cursor: pointer;
+            z-index: 200;
+            box-shadow: 0 0 20px rgba(0,23,168,0.5);
+        }
+
+        /* ============================================
+           LOADING
+        ============================================ */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #94A3B8;
+            font-size: 14px;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-top: 2px solid #22D3EE;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ============================================
+           EMPTY STATE
+        ============================================ */
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            color: #94A3B8;
+        }
+
+        .empty-state-icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+
+        .empty-state p {
+            font-size: 14px;
+        }
+
+        /* ============================================
+           RESPONSIVE
+        ============================================ */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .sidebar-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .event-item {
+                flex-direction: column;
+            }
+
+            .profile-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="container navbar-inner">
+        <div class="logo">MUONS</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <span id="navUserName" style="color:#22D3EE; font-size:14px; font-weight:600;"></span>
+        </div>
+    </div>
+</div>
+
+<!-- DASHBOARD WRAPPER -->
+<div class="dashboard-wrapper">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+
+        <!-- USER INFO -->
+        <div class="sidebar-user">
+            <div class="sidebar-user-avatar" id="sidebarAvatar">?</div>
+            <div class="sidebar-user-name" id="sidebarName">Loading...</div>
+            <div class="sidebar-user-role" id="sidebarRole">---</div>
+        </div>
+
+        <!-- NAV LINKS -->
+        <ul class="sidebar-nav" id="sidebarNav">
+            <!-- Filled by JS based on role -->
+        </ul>
+
+        <!-- LOGOUT -->
+        <div class="sidebar-logout">
+            <button class="logout-btn" onclick="handleLogout()">
+                🚪 Logout
+            </button>
+        </div>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- ==================== OVERVIEW PANEL ==================== -->
+        <div class="panel active" id="panel-overview">
+            <div class="panel-header">
+                <h2>Welcome back, <span id="welcomeName">...</span> 👋</h2>
+                <p>Here's what's happening at MUONS today</p>
+            </div>
+
+            <div class="dash-grid" id="overviewCards">
+                <!-- Filled by JS -->
+            </div>
+
+            <!-- Recent News -->
+            <div class="table-wrapper">
+                <div class="table-header">
+                    <h3>📰 Latest News</h3>
+                    <button class="btn btn-primary btn-sm"
+                        onclick="showPanel('panel-news')">View All</button>
+                </div>
+                <div id="overviewNews" style="padding: 20px;">
+                    <div class="loading">
+                        <span class="loading-spinner"></span> Loading...
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upcoming Events -->
+            <div class="table-wrapper">
+                <div class="table-header">
+                    <h3>📅 Upcoming Events</h3>
+                    <button class="btn btn-primary btn-sm"
+                        onclick="showPanel('panel-events')">View All</button>
+                </div>
+                <div id="overviewEvents" style="padding: 20px;">
+                    <div class="loading">
+                        <span class="loading-spinner"></span> Loading...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== NEWS PANEL ==================== -->
+        <div class="panel" id="panel-news">
+            <div class="panel-header">
+                <h2>📰 News & Announcements</h2>
+                <p>Latest updates from MUONS</p>
+            </div>
+
+            <!-- Add News Form (admin/member only) -->
+            <div class="dash-form" id="addNewsForm" style="display:none;">
+                <h3>+ Add News</h3>
+                <div id="newsAlert" class="dash-alert"></div>
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="newsTitle" placeholder="News title">
+                </div>
+                <div class="form-group">
+                    <label>Content</label>
+                    <textarea id="newsContent" placeholder="Write news content..."></textarea>
+                </div>
+                <button class="btn btn-primary" onclick="submitNews()">
+                    Publish News
+                </button>
+            </div>
+
+            <div class="news-list" id="newsList">
+                <div class="loading">
+                    <span class="loading-spinner"></span> Loading news...
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== EVENTS PANEL ==================== -->
+        <div class="panel" id="panel-events">
+            <div class="panel-header">
+                <h2>📅 Events Calendar</h2>
+                <p>Upcoming and past MUONS events</p>
+            </div>
+
+            <!-- Add Event Form (admin only) -->
+            <div class="dash-form" id="addEventForm" style="display:none;">
+                <h3>+ Add Event</h3>
+                <div id="eventAlert" class="dash-alert"></div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Event Title</label>
+                        <input type="text" id="eventTitle" placeholder="Event name">
+                    </div>
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" id="eventDate">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Venue</label>
+                        <input type="text" id="eventVenue" placeholder="Location">
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select id="eventStatus">
+                            <option value="upcoming">Upcoming</option>
+                            <option value="completed">Completed</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="eventDesc" placeholder="Event description..."></textarea>
+                </div>
+                <button class="btn btn-primary" onclick="submitEvent()">
+                    Add Event
+                </button>
+            </div>
+
+            <div class="events-list" id="eventsList">
+                <div class="loading">
+                    <span class="loading-spinner"></span> Loading events...
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== GALLERY PANEL ==================== -->
+        <div class="panel" id="panel-gallery">
+            <div class="panel-header">
+                <h2>📸 Gallery</h2>
+                <p>MUONS media collection</p>
+            </div>
+
+            <!-- Add Gallery (admin only) -->
+            <div class="dash-form" id="addGalleryForm" style="display:none;">
+                <h3>+ Add Gallery Item</h3>
+                <div id="galleryAlert" class="dash-alert"></div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="galleryTitle" placeholder="Photo title">
+                    </div>
+                    <div class="form-group">
+                        <label>Event</label>
+                        <input type="text" id="galleryEvent" placeholder="Event name">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Image URL</label>
+                        <input type="url" id="galleryURL" placeholder="https://...">
+                    </div>
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" id="galleryDate">
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="submitGallery()">
+                    Add to Gallery
+                </button>
+            </div>
+
+            <div id="galleryGrid" style="
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 16px;
+            ">
+                <div class="loading">
+                    <span class="loading-spinner"></span> Loading gallery...
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== MEMBERS PANEL ==================== -->
+        <div class="panel" id="panel-members">
+            <div class="panel-header">
+                <h2>👥 Members</h2>
+                <p>MUONS active members</p>
+            </div>
+
+            <div class="table-wrapper">
+                <div class="table-header">
+                    <h3>Member Directory</h3>
+                </div>
+                <div id="membersList">
+                    <div class="loading">
+                        <span class="loading-spinner"></span> Loading members...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== ACHIEVEMENTS PANEL ==================== -->
+        <div class="panel" id="panel-achievements">
+            <div class="panel-header">
+                <h2>🏆 Achievements</h2>
+                <p>MUONS milestones and accomplishments</p>
+            </div>
+
+            <!-- Add Achievement (admin only) -->
+            <div class="dash-form" id="addAchievementForm" style="display:none;">
+                <h3>+ Add Achievement</h3>
+                <div id="achievementAlert" class="dash-alert"></div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="achTitle" placeholder="Achievement title">
+                    </div>
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" id="achDate">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="achDesc" placeholder="Describe the achievement..."></textarea>
+                </div>
+                <button class="btn btn-primary" onclick="submitAchievement()">
+                    Add Achievement
+                </button>
+            </div>
+
+            <div id="achievementsList" style="display: grid; gap: 16px;">
+                <div class="loading">
+                    <span class="loading-spinner"></span> Loading achievements...
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== EQUIPMENT PANEL ==================== -->
+        <div class="panel" id="panel-equipment">
+            <div class="panel-header">
+                <h2>🎥 Equipment</h2>
+                <p>Camera and gear tracking</p>
+            </div>
+
+            <div class="table-wrapper">
+                <div class="table-header">
+                    <h3>Equipment List</h3>
+                </div>
+                <div id="equipmentList">
+                    <div class="loading">
+                        <span class="loading-spinner"></span> Loading equipment...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== PROFILE PANEL ==================== -->
+        <div class="panel" id="panel-profile">
+            <div class="panel-header">
+                <h2>👤 My Profile</h2>
+                <p>Your MUONS account details</p>
+            </div>
+
+            <div class="profile-card" id="profileCard">
+                <!-- Filled by JS -->
+            </div>
+        </div>
+
+        <!-- ==================== ADMIN PANEL ==================== -->
+        <div class="panel" id="panel-admin">
+            <div class="panel-header">
+                <h2>⚙️ Admin Panel</h2>
+                <p>Manage users and system settings</p>
+            </div>
+
+            <div class="table-wrapper">
+                <div class="table-header">
+                    <h3>All Users</h3>
+                    <button class="btn btn-primary btn-sm" onclick="loadUsers()">
+                        🔄 Refresh
+                    </button>
+                </div>
+                <div id="usersList">
+                    <div class="loading">
+                        <span class="loading-spinner"></span> Loading users...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<!-- MOBILE SIDEBAR TOGGLE -->
+<button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()">☰</button>
+
+<script src="api.js"></script>
+<script>
+
+// ============================================
+//   CHECK LOGIN
+// ============================================
+const user = getSession();
+if (!user) {
+    window.location.href = "auth.html";
+}
+
+// ============================================
+//   INIT DASHBOARD
+// ============================================
+function initDashboard() {
+
+    // Set user info
+    document.getElementById("welcomeName").textContent  = user.name.split(" ")[0];
+    document.getElementById("navUserName").textContent  = user.name;
+    document.getElementById("sidebarName").textContent  = user.name;
+    document.getElementById("sidebarRole").textContent  = user.role.toUpperCase();
+    document.getElementById("sidebarAvatar").textContent = user.name.charAt(0).toUpperCase();
+
+    // Build sidebar nav based on role
+    buildSidebarNav();
+
+    // Build overview cards
+    buildOverviewCards();
+
+    // Load overview data
+    loadOverviewNews();
+    loadOverviewEvents();
+
+    // Build profile card
+    buildProfileCard();
+}
+
+// ============================================
+//   SIDEBAR NAV BUILDER
+// ============================================
+function buildSidebarNav() {
+    const nav = document.getElementById("sidebarNav");
+    const role = user.role;
+
+    // Base links for everyone
+    let links = [
+        { icon: "🏠", label: "Overview",     panel: "panel-overview" },
+        { icon: "📰", label: "News",          panel: "panel-news" },
+        { icon: "📅", label: "Events",        panel: "panel-events" },
+        { icon: "📸", label: "Gallery",       panel: "panel-gallery" },
+        { icon: "🏆", label: "Achievements",  panel: "panel-achievements" },
+        { icon: "👥", label: "Members",       panel: "panel-members" },
+    ];
+
+    // Member / Tech / Admin extras
+    if (role === "member" || role === "tech" || role === "admin") {
+        links.push({ icon: "🎥", label: "Equipment", panel: "panel-equipment" });
+    }
+
+    // Admin only
+    if (role === "admin") {
+        links.push({ icon: "⚙️", label: "Admin Panel", panel: "panel-admin" });
+    }
+
+    // Profile always last
+    links.push({ icon: "👤", label: "My Profile", panel: "panel-profile" });
+
+    nav.innerHTML = links.map((l, i) => `
+        <li>
+            <a onclick="showPanel('${l.panel}')"
+               id="nav-${l.panel}"
+               class="${i === 0 ? 'active' : ''}">
+                <span class="nav-icon">${l.icon}</span>
+                ${l.label}
+            </a>
+        </li>
+    `).join("");
+
+    // Show forms based on role
+    if (role === "admin" || role === "member") {
+        const addNewsForm = document.getElementById("addNewsForm");
+        if (addNewsForm) addNewsForm.style.display = "block";
+    }
+
+    if (role === "admin") {
+        const addEventForm       = document.getElementById("addEventForm");
+        const addGalleryForm     = document.getElementById("addGalleryForm");
+        const addAchievementForm = document.getElementById("addAchievementForm");
+        if (addEventForm)       addEventForm.style.display       = "block";
+        if (addGalleryForm)     addGalleryForm.style.display     = "block";
+        if (addAchievementForm) addAchievementForm.style.display = "block";
+    }
+}
+
+// ============================================
+//   PANEL SWITCHER
+// ============================================
+function showPanel(panelId) {
+
+    // Hide all panels
+    document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+
+    // Remove active from nav
+    document.querySelectorAll(".sidebar-nav a").forEach(a => a.classList.remove("active"));
+
+    // Show selected panel
+    document.getElementById(panelId).classList.add("active");
+
+    // Set active nav
+    const navLink = document.getElementById("nav-" + panelId);
+    if (navLink) navLink.classList.add("active");
+
+    // Load panel data
+    switch(panelId) {
+        case "panel-news":         loadNews();         break;
+        case "panel-events":       loadEvents();       break;
+        case "panel-gallery":      loadGallery();      break;
+        case "panel-members":      loadMembers();      break;
+        case "panel-achievements": loadAchievements(); break;
+        case "panel-equipment":    loadEquipment();    break;
+        case "panel-admin":        loadUsers();        break;
+    }
+
+    // Close sidebar on mobile
+    document.getElementById("sidebar").classList.remove("open");
+}
+
+// ============================================
+//   OVERVIEW CARDS
+// ============================================
+function buildOverviewCards() {
+    const cards = [
+        { icon: "📸", value: "120K+", label: "Photos Captured" },
+        { icon: "🎬", value: "50+",   label: "Events Covered"  },
+        { icon: "👥", value: "35",    label: "Active Members"  },
+        { icon: "🏆", value: "2018",  label: "Founded"         },
+    ];
+
+    document.getElementById("overviewCards").innerHTML = cards.map(c => `
+        <div class="dash-card">
+            <div class="dash-card-icon">${c.icon}</div>
+            <div class="dash-card-value">${c.value}</div>
+            <div class="dash-card-label">${c.label}</div>
+        </div>
+    `).join("");
+}
+
+// ============================================
+//   OVERVIEW NEWS
+// ============================================
+async function loadOverviewNews() {
+    const result = await getNews();
+    const container = document.getElementById("overviewNews");
+
+    if (result.success && result.data.length > 0) {
+        container.innerHTML = result.data.slice(0, 3).map(n => `
+            <div style="padding: 14px 24px; border-bottom: 1px solid rgba(255,255,255,0.03);">
+                <div style="font-size:11px; color:#22D3EE; margin-bottom:4px;">
+                    📅 ${n.date}
+                </div>
+                <div style="font-size:14px; font-weight:600; margin-bottom:4px;">
+                    ${n.title}
+                </div>
+                <div style="font-size:12px; color:#94A3B8;">
+                    ${n.content.substring(0, 80)}...
+                </div>
+            </div>
+        `).join("");
+    } else {
+        container.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon">📭</div>
+                <p>No news yet</p>
+            </div>`;
+    }
+}
+
+// ============================================
+//   OVERVIEW EVENTS
+// ============================================
+async function loadOverviewEvents() {
+    const result = await getEvents();
+    const container = document.getElementById("overviewEvents");
+
+    if (result.success && result.data.length > 0) {
+        const upcoming = result.data.filter(e => e.status === "upcoming").slice(0, 3);
+
+        if (upcoming.length > 0) {
+            container.innerHTML = upcoming.map(e => `
+                <div style="padding: 14px 24px; border-bottom: 1px solid rgba(255,255,255,0.03);">
+                    <div style="font-size:11px; color:#22D3EE; margin-bottom:4px;">
+                        📅 ${e.date} | 📍 ${e.venue}
+                    </div>
+                    <div style="font-size:14px; font-weight:600; margin-bottom:4px;">
+                        ${e.title}
+                    </div>
+                    <div style="font-size:12px; color:#94A3B8;">
+                        ${e.description}
+                    </div>
+                </div>
+            `).join("");
+        } else {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-state-icon">📅</div>
+                    <p>No upcoming events</p>
+                </div>`;
+        }
+    } else {
+        container.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon">📅</div>
+                <p>No events yet</p>
+            </div>`;
+    }
+}
+
+// ============================================
+//   LOAD NEWS
+// ============================================
+async function loadNews() {
+    const container = document.getElementById("newsList");
+    container.innerHTML = `<div class="loading"><span class="loading-spinner"></span> Loading...</div>`;
+
+    const result = await getNews();
+
+    if (result.success && result.data.length > 0) {
+        container.innerHTML = result.data.map(n => `
+            <div class="news-item">
+                <div class="news-item-date">📅 ${n.date}</div>
+                <div class="news-item-title">${n.title}</div>
+                <div class="news-item-content">${n.content}</div>
+                <div class="news-item-author">By ${n.author}</div>
+            </div>
+        `).join("");
+    } else {
+        container.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon">📭</div>
+                <p>No news yet. Be the first to post!</p>
+            </div>`;
+    }
+}
+
+// ============================================
+//   SUBMIT NEWS
+// ============================================
+async function submitNews() {
+    const title   = document.getElementById("newsTitle").value.trim();
+    const content = document.getElementById("newsContent").value.trim();
+    const alert   = document.getElementById("newsAlert");
+
+    if (!title || !content) {
+        showAlert("newsAlert", "Please fill all fields", "error");
+        return;
+    }
+
+    const result = await addNews(title, content, user.name);
+
+    if (result.success) {
+        showAlert("newsAlert", "News published successfully!", "success");
+        document.getElementById("newsTitle").value   = "";
+        document.getElementById("newsContent").value = "";
+        loadNews();
+    } else {
+        showAlert("newsAlert", result.message, "error");
+    }
+}
+
+// ============================================
+//   LOAD EVENTS
+// ============================================
+async function loadEvents() {
+    const container = document.getElementById("eventsList");
+    container.innerHTML = `<div class="loading"><span class="loading-spinner"></span> Loading...</div>`;
+
+    const result = await getEvents();
+
+    if (result.success && result.data.length > 0) {
+        container.innerHTML = result.data.map(e => {
+            const date  = new Date(e.date);
+            const day   = isNaN(date) ? "--" : date.getDate();
+            const month = isNaN(date) ? "--" : date.toLocaleString("default", { month: "short" });
+
+            return `
+                <div class="event-item">
+                    <div class="event-date">
+                        <div class="event-date-day">${day}</div>
+                        <div class="event-date-month">${month}</div>
+                    </div>
+                    <div class="event-info">
+                        <div class="event-title">${e.title}</div>
+                        <div class="event-venue">📍 ${e.venue}</div>
+                        <div class="event-desc">${e.description}</div>
+                    </div>
+                    <span class="badge badge-${e.status}">${e.status}</span>
+                </div>
+            `;
+        }).join("");
+    } else {
+        container.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon">📅</div>
+                <p>No events added yet</p>
+            </div>`;
+    }
+}
+
+// ============================================
+//   SUBMIT EVENT
+// ============================================
+async function submitEvent() {
+    const title       = document.getElementById("eventTitle").value.trim();
+    const date        = document.getElementById("eventDate").value;
+    const venue       = document.getElementById("eventVenue").value.trim();
+    const status      = document.getElementById("eventStatus").value;
+    const description = document.getElementById("eventDesc").value.trim();
+
+    if (!title || !date) {
+        showAlert("eventAlert", "Title and date are required", "error");
+        return;
+    }
+
+    const result = await addEvent(title, date, venue, status, description);
+
+    if (result.success) {
+        showAlert("eventAlert", "Event added successfully!", "success");
+        document.getElementById("eventTitle").value  = "";
+        document.getElementById("eventDate").value   = "";
+        document.getElementById("eventVenue").value  = "";
+        document.getElementById("eventDesc").value   = "";
+        loadEvents();
+    } else {
+        showAlert("eventAlert", result.message, "error");
+    }
+}
+
+// ============================================
+//   LOAD GALLERY
+// ============================================
+async function loadGallery() {
+    const container = document.getElementById("galleryGrid");
+    container.innerHTML = `<div class="loading"><span class="loading-spinner"></span> Loading...</div>`;
+
+    const result = await getGallery();
+
+    if (result.success && result.data.length > 0) {
+        container.innerHTML = result.data.map(g => `
+            <div style="
+                border-radius: 12px;
+                overflow: hidden;
+                border: 1px solid rgba(255,255,255,0.05);
+                background: rgba(15,23,42,0.6);
+                transition: 0.3s ease;
+            " onmouseover="this.style.borderColor='rgba(34,211,238,0.4)'"
+               onmouseout="this.style.borderColor='rgba(255,255,255,0.05)'">
+                <img src="${g.imageURL}"
+                     alt="${g.title}"
+                     style="width:100%; height:180px; object-fit:cover;"
+                     onerror="this.src='https://via.placeholder.com/300x180/0F172A/22D3EE?text=MUONS'">
+                <div style="padding: 12px 14px;">
+                    <p style="font-size:13px; font-weight:600; margin-bottom:4px;">${g.title}</p>
+                    <p style="font-size:11px; color:#94A3B8;">${g.event} • ${g.date}</p>
+                </div>
+            </div>
+        `).join("");
+    } else {
+        container.innerHTML = `
+            <div class="empty-state" style="grid-column: 1/-1;">
+                <div class="empty-state-icon">📷</div>
+                <p>No gallery items yet</p>
+            </div>`;
+    }
+}
+
+// ============================================
+//   SUBMIT GALLERY
+// ============================================
+async function submitGallery() {
+    const title    = document.getElementById("galleryTitle").value.trim();
+    const imageURL = document.getElementById("galleryURL").value.trim();
+    const event    = document.getElementById("galleryEvent").value.trim();
+    const date     = document.getElementById("galleryDate").value;
+
+    if (!title || !imageURL) {
+        showAlert("galleryAlert", "Title and image URL are required", "error");
+        return;
+    }
+
+    const result = await addGallery(title, imageURL, event, date);
+
+    if (result.success) {
+        showAlert("galleryAlert", "Gallery item added!", "success");
+        document.getElementById("galleryTitle").value = "";
+        document.getElementById("galleryURL").value   = "";
+        document.getElementById("galleryEvent").value = "";
+        document.getElementById("galleryDate").value  = "";
+        loadGallery();
+    } else {
+        showAlert("galleryAlert", result.message, "error");
+    }
+}
+
+// ============================================
+//   LOAD MEMBERS
+// ============================================
+async function loadMembers() {
+    const container = document.getElementById("membersList");
+    container.innerHTML = `<div class="loading"><span class="loading-spinner"></span> Loading...</div>`;
+
+    const result = await getMembers();
+
+    if (result.success && result.data.length > 0) {
+        container.innerHTML = `
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th>Position</th>
+                        <th>Joined</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${result.data.map(m => `
+                        <tr>
+                            <td>${m.name}</td>
+                            <td><span class="badge badge-${m.role}">${m.role}</span></td>
+                            <td>${m.position || "—"}</td>
+                            <td>${m.joinDate || "—"}</td>
+                        </tr>
+                    `).join("")}
+                </tbody>
+            </table>`;
+    } else {
+        container.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon">👥</div>
+                <p>No members added yet</p>
+            </div>`;
+    }
+}
+
+// ============================================
+//   LOAD ACHIEVEMENTS
+// ============================================
+async function loadAchievements() {
+    const container = document.getElementById("achievementsList");
+    container.innerHTML = `<div class="loading"><span class="loading-spinner"></span> Loading...</div>`;
+
+    const result = await getAchievements();
+
+    if (result.success && result.data.length > 0) {
+        container.innerHTML = result.data.map(a => `
+            <div class="news-item">
+                <div class="news-item-date">🏆 ${a.date}</div>
+                <div class="news-item-title">${a.title}</div>
+                <div class="news-item-content">${a.description}</div>
+            </div>
+        `).join("");
+    } else {
+        container.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon">🏆</div>
+                <p>No achievements added yet</p>
+            </div>`;
+    }
+}
+
+// ============================================
+//   SUBMIT ACHIEVEMENT
+// ============================================
+async function submitAchievement() {
+    const title       = document.getElementById("achTitle").value.trim();
+    const date        = document.getElementById("achDate").value;
+    const description = document.getElementById("achDesc").value.trim();
+
+    if (!title) {
+        showAlert("achievementAlert", "Title is required", "error");
+        return;
+    }
+
+    const result = await addAchievement(title, date, description);
+
+    if (result.success) {
+        showAlert("achievementAlert", "Achievement added!", "success");
+        document.getElementById("achTitle").value = "";
+        document.getElementById("achDate").value  = "";
+        document.getElementById("achDesc").value  = "";
+        loadAchievements();
+    } else {
+        showAlert("achievementAlert", result.message, "error");
+    }
+}
+
+// ============================================
+//   LOAD EQUIPMENT
+// ============================================
+async function loadEquipment() {
+    const container = document.getElementById("equipmentList");
+    container.innerHTML = `<div class="loading"><span class="loading-spinner"></span> Loading...</div>`;
+
+    const result = await getEquipment();
+
+    if (result.success && result.data.length > 0) {
+        container.innerHTML = `
+            <table>
+                <thead>
+                    <tr>
+                        <th>Equipment</th>
+                        <th>Status</th>
+                        <th>Assigned To</th>
+                        <th>Due Date</th>
+                        <th>Condition</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${result.data.map(e => `
+                        <tr>
+                            <td>${e.name}</td>
+                            <td>
+                                <span class="badge badge-${e.status === 'available' ? 'available' : 'unavailable'}">
+                                    ${e.status}
+                                </span>
+                            </td>
+                            <td>${e.assignedTo || "—"}</td>
+                            <td>${e.dueDate    || "—"}</td>
+                            <td>${e.condition  || "—"}</td>
+                        </tr>
+                    `).join("")}
+                </tbody>
+            </table>`;
+    } else {
+        container.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon">🎥</div>
+                <p>No equipment added yet</p>
+            </div>`;
+    }
+}
+
+// ============================================
+//   LOAD USERS (Admin)
+// ============================================
+async function loadUsers() {
+    const container = document.getElementById("usersList");
+    container.innerHTML = `<div class="loading"><span class="loading-spinner"></span> Loading...</div>`;
+
+    const result = await getUsers();
+
+    if (result.success && result.data.length > 0) {
+        container.innerHTML = `
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Joined</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${result.data.map(u => `
+                        <tr>
+                            <td style="font-size:11px; color:#64748B;">${u.id}</td>
+                            <td>${u.name}</td>
+                            <td style="font-size:12px; color:#94A3B8;">${u.email}</td>
+                            <td><span class="badge badge-${u.role}">${u.role}</span></td>
+                            <td><span class="badge badge-${u.status}">${u.status}</span></td>
+                            <td style="font-size:12px;">${u.joinDate}</td>
+                            <td>
+                                ${u.status === "pending" ? `
+                                    <button class="btn btn-success btn-sm"
+                                        onclick="handleApprove('${u.id}', 'approved')">
+                                        ✓ Approve
+                                    </button>
+                                    <button class="btn btn-danger btn-sm"
+                                        onclick="handleApprove('${u.id}', 'rejected')"
+                                        style="margin-left:6px;">
+                                        ✗ Reject
+                                    </button>
+                                ` : `
+                                    <span style="font-size:12px; color:#475569;">
+                                        ${u.status}
+                                    </span>
+                                `}
+                            </td>
+                        </tr>
+                    `).join("")}
+                </tbody>
+            </table>`;
+    } else {
+        container.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon">👤</div>
+                <p>No users found</p>
+            </div>`;
+    }
+}
+
+// ============================================
+//   APPROVE / REJECT USER
+// ============================================
+async function handleApprove(userID, status) {
+    const result = await approveUser(userID, status);
+    if (result.success) {
+        loadUsers();
+    } else {
+        alert("Error: " + result.message);
+    }
+}
+
+// ============================================
+//   PROFILE CARD
+// ============================================
+function buildProfileCard() {
+    document.getElementById("profileCard").innerHTML = `
+        <div class="profile-avatar">${user.name.charAt(0).toUpperCase()}</div>
+        <div class="profile-info">
+            <h2>${user.name}</h2>
+            <p>${user.email}</p>
+            <span class="badge badge-${user.role}">${user.role}</span>
+            <span class="badge badge-${user.status}" style="margin-left:8px;">${user.status}</span>
+            <p style="margin-top:12px; font-size:12px; color:#475569;">
+                Member since ${user.joinDate}
+            </p>
+        </div>
+    `;
+}
+
+// ============================================
+//   ALERT HELPER
+// ============================================
+function showAlert(id, message, type) {
+    const el = document.getElementById(id);
+    el.textContent = message;
+    el.className   = "dash-alert " + type + " show";
+
+    setTimeout(() => {
+        el.className = "dash-alert";
+    }, 4000);
+}
+
+// ============================================
+//   LOGOUT
+// ============================================
+function handleLogout() {
+    clearSession();
+    window.location.href = "index.html";
+}
+
+// ============================================
+//   MOBILE SIDEBAR TOGGLE
+// ============================================
+function toggleSidebar() {
+    document.getElementById("sidebar").classList.toggle("open");
+}
+
+// ============================================
+//   INIT
+// ============================================
+initDashboard();
+
+</script>
+
+</body>
+</html>
